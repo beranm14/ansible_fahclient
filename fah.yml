@@ -1,0 +1,7 @@
+- hosts:
+  - servers 
+  vars:
+   username: "beranm"
+   remote_commands_password: "aflyingdidly" 
+  roles:
+    - fahclient

@@ -1,0 +1,16 @@
+<config>
+ 
+  <fold-anon v='true'/>
+
+  <password v='{{ remote_commands_password }}'/>
+ 
+  <power v='FULL'/>
+
+  <user v='beranm'/>
+
+ 
+  <slot id='0' type='CPU'/>
+ 
+  {% if check_nvidia is succeeded %}<slot id='1' type='GPU'/>{% endif %}
+
+</config>

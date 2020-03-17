@@ -1,0 +1,30 @@
+- name: Install fahclient
+  apt:
+    deb: https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.5/fahclient_7.5.1_amd64.deb
+    state: present
+  become: yes
+
+- name: Detect nvidia-smi
+  shell: nvidia-smi
+  ignore_errors: True
+  register: check_nvidia
+
+- name: Copy config
+  template:
+    src: fahclient_config.xml.j2
+    dest: /etc/fahclient/config.xml
+  become: yes
+
+- name: Enable service FAHClient
+  systemd:
+    name: FAHClient
+    enabled: yes
+    masked: no
+  become: yes
+
+- name: Restart FAHClient
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: FAHClient
+  become: yes
